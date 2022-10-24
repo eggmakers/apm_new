@@ -18,15 +18,16 @@ bool ModeDrawStar::init(bool ignore_checks)
 // 生成五角星航线
 void ModeDrawStar::generate_path()
 {
-    float radius_cm = 100;
+    float radius_cm = 200;
+    float radius_short_cm = 141;
 
     wp_nav->get_wp_stopping_point(path[0]);
 
-    path[1] = path[0] + Vector3f(1.0f, 0, 0) * radius_cm;
-    path[2] = path[0] + Vector3f(-cosf(radians(36.0f)), -sinf(radians(36.0f)), 0) * radius_cm;
-    path[3] = path[0] + Vector3f(sinf(radians(18.0f)), cosf(radians(18.0f)), 0) * radius_cm;
-    path[4] = path[0] + Vector3f(sinf(radians(18.0f)), -cosf(radians(18.0f)), 0) * radius_cm;
-    path[5] = path[0] + Vector3f(-cosf(radians(36.0f)), sinf(radians(36.0f)), 0) * radius_cm;
+    path[1] = path[0] + Vector3f(1.0f, 0, 0) * radius_short_cm;
+    path[2] = path[0] + Vector3f(sinf(radians(45.0f)), -cosf(radians(45.0f)), 0) * radius_cm;
+    path[3] = path[0] + Vector3f(-cosf(radians(45.0f)), -sinf(radians(45.0f)), 0) * radius_cm;
+    path[4] = path[0] + Vector3f(-cosf(radians(45.0f)), sinf(radians(45.0f)), 0) * radius_cm;
+    path[5] = path[0] + Vector3f(sinf(radians(45.0f)), cosf(radians(45.0f)), 0) * radius_cm;
     path[6] = path[1];
 }
 
