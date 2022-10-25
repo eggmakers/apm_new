@@ -172,6 +172,8 @@
 
 #include "mode.h"
 
+#define SIM_OPENMV DISABLED
+
 class Copter : public AP_Vehicle {
 public:
     friend class GCS_MAVLINK_Copter;

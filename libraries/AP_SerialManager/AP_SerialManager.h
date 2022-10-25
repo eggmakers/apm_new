@@ -170,8 +170,8 @@ public:
         SerialProtocol_CoDevESC = 41,
         SerialProtocol_MSP_DisplayPort = 42,
         SerialProtocol_MAVLinkHL = 43,
-        SerialProtocol_OPEN_MV = 44,
-        SerialProtocol_NumProtocols                    // must be the last value
+        SerialProtocol_NumProtocols = 44,
+        SerialProtocol_OPEN_MV                  // must be the last value
     };
 
     // get singleton instance

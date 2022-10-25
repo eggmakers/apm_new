@@ -479,6 +479,7 @@ void Copter::update_batt_compass(void)
 void Copter::update_OpenMV(void)
 {
      // simulation
+#if SIM_OPENMV == ENABLED
     bool sim_openmv_new_data = false;
     static uint32_t last_sim_new_data_time_ms = 0;
     if(flightmode != &mode_guided) {
@@ -500,22 +501,26 @@ void Copter::update_OpenMV(void)
         openmv.cx = 0;
         openmv.cy = 0;
     }
-
+#endif
     // end of simulation code
 
     static uint32_t last_set_pos_target_time_ms = 0;
     Vector3f target = Vector3f(0, 0, 0);
-    if(openmv.update() || sim_openmv_new_data) {
+    if(openmv.update()
+#if SIM_OPENMV == ENABLED
+     || sim_openmv_new_data
+#endif
+     ) {
         Log_Write_OpenMV();
 
         if(flightmode != &mode_guided)
             return;
 
         int16_t target_body_frame_y = (int16_t)openmv.cx;  // QQVGA 160 * 120
-        int16_t target_body_frame_z = (int16_t)openmv.cy;
+        // int16_t target_body_frame_z = (int16_t)openmv.cy;
 
         float angle_y_deg = target_body_frame_y * 60.0f / 160.0f;
-        float angle_z_deg = target_body_frame_z * 60.0f / 120.0f;
+        float angle_z_deg = 0;
 
         Vector3f v = Vector3f(1.0f, tanf(radians(angle_y_deg)), tanf(radians(angle_z_deg)));
         v = v / v.length();

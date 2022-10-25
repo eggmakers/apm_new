@@ -496,7 +496,7 @@ const struct LogStructure Copter::log_structure[] = {
     { LOG_DATA_FLOAT_MSG, sizeof(log_Data_Float),         
       "DFLT",  "QBf",         "TimeUS,Id,Value", "s--", "F--" },
     { LOG_OPENMV_MSG, sizeof(log_OpenMV),
-      "OMV",   "QBf",         "TimeUS,cx,xy", "s--", "F--" },
+      "OMV",   "QBB",         "TimeUS,cx,xy", "s--", "F--" },
     
 // @LoggerMessage: HELI
 // @Description: Helicopter related messages 
