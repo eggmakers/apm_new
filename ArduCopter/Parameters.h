@@ -598,6 +598,8 @@ public:
     AP_Float tuning_min;
     AP_Float tuning_max;
 
+    AP_Float cube_radius_cm;  // cube's radius in cm
+
 #if AC_OAPATHPLANNER_ENABLED == ENABLED
     // object avoidance path planning
     AP_OAPathPlanner oa;

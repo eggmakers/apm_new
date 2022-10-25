@@ -1143,6 +1143,13 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @User: Standard
     AP_SUBGROUPINFO(command_model_pilot, "PILOT_Y_", 56, ParametersG2, AC_CommandModel),
 
+    // @Param: CUBE_R_CM
+    // @DisplayName: star radius cm
+    // @Description: 五角星航线中五角星的大小
+    // @Units: cm
+    // @User: Advanced
+    AP_GROUPINFO("CUBE_R_CM", 57, ParametersG2, cube_radius_cm, 200.0f),
+
     AP_GROUPEND
 };
 

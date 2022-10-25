@@ -18,8 +18,8 @@ bool ModeDrawStar::init(bool ignore_checks)
 // 生成五角星航线
 void ModeDrawStar::generate_path()
 {
-    float radius_cm = 200;
-    float radius_short_cm = 141;
+    float radius_cm = g2.cube_radius_cm;
+    float radius_short_cm = sqrtf(g2.cube_radius_cm)*10;
 
     wp_nav->get_wp_stopping_point(path[0]);
 
