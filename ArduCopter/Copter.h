@@ -69,6 +69,7 @@
 #include <AC_Sprayer/AC_Sprayer.h>          // Crop sprayer library
 #include <AP_ADSB/AP_ADSB.h>                // ADS-B RF based collision avoidance module library
 #include <AP_Proximity/AP_Proximity.h>      // ArduPilot proximity sensor library
+#include <AP_OpenMV/AP_OpenMV.h>            // OpenMV driver library
 
 // Configuration
 #include "defines.h"
@@ -240,6 +241,8 @@ private:
     RC_Channel *channel_yaw;
 
     AP_Logger logger;
+
+    AP_OpenMV openmv{};
 
     // flight modes convenience array
     AP_Int8 *flight_modes;
@@ -803,6 +806,7 @@ private:
     void Log_Write_Control_Tuning();
     void Log_Write_Attitude();
     void Log_Write_EKF_POS();
+    void Log_Write_OpenMV();
     void Log_Write_Data(LogDataID id, int32_t value);
     void Log_Write_Data(LogDataID id, uint32_t value);
     void Log_Write_Data(LogDataID id, int16_t value);
@@ -881,6 +885,7 @@ private:
     bool rangefinder_up_ok() const;
     void update_optical_flow(void);
     void compass_cal_update(void);
+    void update_OpenMV(void);
 
     // RC_Channel.cpp
     void save_trim();
