@@ -1150,6 +1150,13 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @User: Advanced
     AP_GROUPINFO("CUBE_R_CM", 57, ParametersG2, cube_radius_cm, 200.0f),
 
+    // @Param: OMV_ERR_CM
+    // @DisplayName: openmv_err_cm
+    // @Description: openmvy轴视角补偿
+    // @Units: cm
+    // @User: Advanced
+    AP_GROUPINFO("OMV_ERR_CM", 58, ParametersG2, omv_err_y_cm, 0),
+
     AP_GROUPEND
 };
 
