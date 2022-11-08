@@ -484,18 +484,18 @@ void Copter::update_OpenMV(void)
     static uint32_t last_sim_new_data_time_ms = 0;
     if(flightmode != &mode_guided) {
         last_sim_new_data_time_ms = millis();
-        openmv.cx = 0;
-        openmv.cy = 0;
+        openmv.cx = 80;
+        openmv.cy = 60;
     } else if (millis()- last_sim_new_data_time_ms < 15000) {
         sim_openmv_new_data = true;
         last_sim_new_data_time_ms = millis();
-        openmv.cx = 80;
-        openmv.cy = 60;
+        openmv.cx = 100;
+        openmv.cy = 50;
     } else if (millis()- last_sim_new_data_time_ms < 30000) {
         sim_openmv_new_data = true;
         last_sim_new_data_time_ms = millis();
-        openmv.cx = -80;
-        openmv.cy = -60;
+        openmv.cx = 250;
+        openmv.cy = 250;
     } else {
         sim_openmv_new_data = false;
         openmv.cx = 0;
@@ -515,14 +515,26 @@ void Copter::update_OpenMV(void)
 
         if(flightmode != &mode_guided)
             return;
-
-        int16_t target_body_frame_y = (int16_t)openmv.cx;  // QQVGA 160 * 120
+        int16_t target_body_frame_y = (int16_t)openmv.cx - 80 - g2.omv_err_y_cm;  // QQVGA 160 * 120
         // int16_t target_body_frame_z = (int16_t)openmv.cy;
 
         float angle_y_deg = target_body_frame_y * 60.0f / 160.0f;
-        float angle_z_deg = 0;
+        if((angle_y_deg-0.0f) <= 0.001)
+        {
+            static uint32_t now = AP_HAL::millis();
+            // gcs().send_text(MAV_SEVERITY_DEBUG, "%d", now);
+            if(AP_HAL::millis()- now > 1000)
+            {
+                // gcs().send_text(MAV_SEVERITY_DEBUG, "%d", AP_HAL::millis()- now);
+                copter.set_mode(Mode::Number::POSHOLD, ModeReason::MISSION_END);
+            }
+                
 
-        Vector3f v = Vector3f(1.0f, tanf(radians(angle_y_deg)), tanf(radians(angle_z_deg)));
+        }
+            
+        // float angle_z_deg = 0;tanf(radians(angle_z_deg))
+
+        Vector3f v = Vector3f(1.0f, tanf(radians(angle_y_deg)), 1.0f);
         v = v / v.length();
 
         const Matrix3f &rotMat = copter.ahrs.get_rotation_body_to_ned();
@@ -670,7 +682,7 @@ void Copter::one_hz_loop()
     // log terrain data
     terrain_logging();
 
-    if(openmv.cx != 0 && openmv.cy)
+    if(openmv.cx != 80 && openmv.cy)
         gcs().send_text(MAV_SEVERITY_CRITICAL,
                         "OpenMV X:%d Y:%d",
                         openmv.cx,
