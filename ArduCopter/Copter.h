@@ -172,7 +172,7 @@
 
 #include "mode.h"
 
-#define SIM_OPENMV DISABLED
+#define SIM_OPENMV ENABLED
 
 class Copter : public AP_Vehicle {
 public:
