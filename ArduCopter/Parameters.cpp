@@ -1150,12 +1150,19 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @User: Advanced
     AP_GROUPINFO("CUBE_R_CM", 57, ParametersG2, cube_radius_cm, 200.0f),
 
-    // @Param: OMV_ERR_CM
-    // @DisplayName: openmv_err_cm
+    // @Param: OMV_ERR_Y_CM
+    // @DisplayName: openmv_err_y_cm
     // @Description: openmvy轴视角补偿
     // @Units: cm
     // @User: Advanced
-    AP_GROUPINFO("OMV_ERR_CM", 58, ParametersG2, omv_err_y_cm, 0),
+    AP_GROUPINFO("OMV_ERR_Y_CM", 58, ParametersG2, omv_err_y_cm, 0),
+
+    // @Param: OMV_ERR_Z_CM
+    // @DisplayName: openmv_err_z_cm
+    // @Description: openmvz轴视角补偿
+    // @Units: cm
+    // @User: Advanced
+    AP_GROUPINFO("OMV_ERR_Z_CM", 59, ParametersG2, omv_err_z_cm, -57.3),
 
     AP_GROUPEND
 };

@@ -516,14 +516,16 @@ void Copter::update_OpenMV(void)
         if(flightmode != &mode_guided)
             return;
         int16_t target_body_frame_y = (int16_t)openmv.cx - 80 - g2.omv_err_y_cm;  // QQVGA 160 * 120
+        float target_body_frame_z = g2.omv_err_z_cm;
         // int16_t target_body_frame_z = (int16_t)openmv.cy;
 
         float angle_y_deg = target_body_frame_y * 60.0f / 160.0f;
+        float angle_z_deg = target_body_frame_z * 60.0f / 120.0f;
         if((angle_y_deg-0.0f) <= 0.001)
         {
             static uint32_t now = AP_HAL::millis();
             // gcs().send_text(MAV_SEVERITY_DEBUG, "%d", now);
-            if(AP_HAL::millis()- now > 1000)
+            if(AP_HAL::millis()- now > 500)
             {
                 // gcs().send_text(MAV_SEVERITY_DEBUG, "%d", AP_HAL::millis()- now);
                 copter.set_mode(Mode::Number::POSHOLD, ModeReason::MISSION_END);
@@ -534,7 +536,7 @@ void Copter::update_OpenMV(void)
             
         // float angle_z_deg = 0;tanf(radians(angle_z_deg))
 
-        Vector3f v = Vector3f(1.0f, tanf(radians(angle_y_deg)), 1.0f);
+        Vector3f v = Vector3f(1.0f, tanf(radians(angle_y_deg)), tanf(radians(angle_z_deg)));
         v = v / v.length();
 
         const Matrix3f &rotMat = copter.ahrs.get_rotation_body_to_ned();

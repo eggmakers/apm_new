@@ -600,6 +600,7 @@ public:
 
     AP_Float cube_radius_cm;  // cube's radius in cm
     AP_Int16 omv_err_y_cm;
+    AP_Float omv_err_z_cm;
 
 #if AC_OAPATHPLANNER_ENABLED == ENABLED
     // object avoidance path planning
