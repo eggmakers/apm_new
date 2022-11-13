@@ -1155,7 +1155,7 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @Description: openmvy轴视角补偿
     // @Units: cm
     // @User: Advanced
-    AP_GROUPINFO("OMV_ERR_Y_CM", 58, ParametersG2, omv_err_y_cm, 0),
+    AP_GROUPINFO("OMV_SIM_ERR_Y_CM", 58, ParametersG2, omv_sim_err_y_cm, 80),
 
     // @Param: OMV_ERR_Z_CM
     // @DisplayName: openmv_err_z_cm
@@ -1163,6 +1163,13 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @Units: cm
     // @User: Advanced
     AP_GROUPINFO("OMV_ERR_Z_CM", 59, ParametersG2, omv_err_z_cm, -57.3),
+
+    // @Param: OMV_ERR_Z_CM
+    // @DisplayName: openmv_err_z_cm
+    // @Description: openmv sim guid模式前进时间
+    // @Units: cm
+    // @User: Advanced
+    AP_GROUPINFO("OMV_SIM_MOVE_S", 60, ParametersG2, omv_sim_mv_s, 500),
 
     AP_GROUPEND
 };

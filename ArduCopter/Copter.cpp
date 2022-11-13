@@ -489,7 +489,7 @@ void Copter::update_OpenMV(void)
     } else if (millis()- last_sim_new_data_time_ms < 15000) {
         sim_openmv_new_data = true;
         last_sim_new_data_time_ms = millis();
-        openmv.cx = 100;
+        openmv.cx = g2.omv_sim_err_y_cm;
         openmv.cy = 50;
     } else if (millis()- last_sim_new_data_time_ms < 30000) {
         sim_openmv_new_data = true;
@@ -515,7 +515,7 @@ void Copter::update_OpenMV(void)
 
         if(flightmode != &mode_guided)
             return;
-        int16_t target_body_frame_y = (int16_t)openmv.cx - 80 - g2.omv_err_y_cm;  // QQVGA 160 * 120
+        int16_t target_body_frame_y = (int16_t)openmv.cx - 80;  // QQVGA 160 * 120
         float target_body_frame_z = g2.omv_err_z_cm;
         // int16_t target_body_frame_z = (int16_t)openmv.cy;
 
@@ -525,10 +525,10 @@ void Copter::update_OpenMV(void)
         {
             static uint32_t now = AP_HAL::millis();
             // gcs().send_text(MAV_SEVERITY_DEBUG, "%d", now);
-            if(AP_HAL::millis()- now > 500)
+            if(AP_HAL::millis()- now > g2.omv_sim_mv_s)
             {
                 // gcs().send_text(MAV_SEVERITY_DEBUG, "%d", AP_HAL::millis()- now);
-                copter.set_mode(Mode::Number::POSHOLD, ModeReason::MISSION_END);
+                copter.set_mode(Mode::Number::LAND, ModeReason::MISSION_END);
             }
                 
 
