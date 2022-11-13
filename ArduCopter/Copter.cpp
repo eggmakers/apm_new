@@ -525,7 +525,7 @@ void Copter::update_OpenMV(void)
         {
             static uint32_t now = AP_HAL::millis();
             // gcs().send_text(MAV_SEVERITY_DEBUG, "%d", now);
-            if(AP_HAL::millis()- now > g2.omv_sim_mv_s)
+            if(AP_HAL::millis()- now > g2.omv_sim_mv_ms)
             {
                 // gcs().send_text(MAV_SEVERITY_DEBUG, "%d", AP_HAL::millis()- now);
                 copter.set_mode(Mode::Number::LAND, ModeReason::MISSION_END);

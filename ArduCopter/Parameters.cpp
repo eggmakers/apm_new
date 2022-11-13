@@ -1164,12 +1164,12 @@ const AP_Param::GroupInfo ParametersG2::var_info[] = {
     // @User: Advanced
     AP_GROUPINFO("OMV_ERR_Z_CM", 59, ParametersG2, omv_err_z_cm, -57.3),
 
-    // @Param: OMV_ERR_Z_CM
-    // @DisplayName: openmv_err_z_cm
+    // @Param: OMV_SIM_MOVE_MS
+    // @DisplayName: openmv_sim_move_ms
     // @Description: openmv sim guid模式前进时间
-    // @Units: cm
+    // @Units: ms
     // @User: Advanced
-    AP_GROUPINFO("OMV_SIM_MOVE_S", 60, ParametersG2, omv_sim_mv_s, 500),
+    AP_GROUPINFO("OMV_SIM_MOVE_MS", 60, ParametersG2, omv_sim_mv_ms, 500),
 
     AP_GROUPEND
 };
