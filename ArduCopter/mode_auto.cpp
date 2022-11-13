@@ -615,7 +615,7 @@ bool ModeAuto::start_command(const AP_Mission::Mission_Command& cmd)
 
 #if NAV_GUIDED == ENABLED
     case MAV_CMD_NAV_GUIDED_ENABLE:             // 92  accept navigation commands from external nav computer
-        do_nav_guided_enable(cmd);
+        copter.set_mode(Mode::Number::FLOWHOLD, ModeReason::MISSION_END);
         break;
 #endif
 
@@ -2169,7 +2169,7 @@ bool ModeAuto::verify_nav_guided_enable(const AP_Mission::Mission_Command& cmd)
     }
 
     // check time and position limits
-    return copter.mode_guided.limit_check();
+    return false;
 }
 #endif  // NAV_GUIDED
 
